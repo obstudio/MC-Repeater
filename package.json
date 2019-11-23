@@ -1,5 +1,5 @@
 {
-  "name": "mc-forwarder",
+  "name": "mc-repeater",
   "version": "0.0.1",
   "description": "",
   "main": "index.js",
@@ -8,12 +8,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/obstudio/MC-Forwarder.git"
+    "url": "git+https://github.com/obstudio/MC-Repeater.git"
   },
   "author": "NN708",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/obstudio/MC-Forwarder/issues"
+    "url": "https://github.com/obstudio/MC-Repeater/issues"
   },
-  "homepage": "https://github.com/obstudio/MC-Forwarder#readme"
+  "homepage": "https://github.com/obstudio/MC-Repeater#readme"
 }
