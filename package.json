@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/obstudio/MC-Repeater/issues"
   },
-  "homepage": "https://github.com/obstudio/MC-Repeater#readme"
+  "homepage": "https://github.com/obstudio/MC-Repeater#readme",
+  "dependencies": {
+    "iconv": "^2.3.5"
+  }
 }
