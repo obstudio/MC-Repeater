@@ -21,6 +21,7 @@ function parseJava(text) {
   const regStart = /^Done \([0-9\.]+s\)! For help, type "help"$/
   const regStop = /^Stopping the server$/
   const regMsg = /^<(\w+)> (.+)$/
+  const regServerMsg = /^\[Server\] (.+)$/
   info = undefined
   if (res = regJoin.exec(text)) {
     info = {
@@ -41,6 +42,10 @@ function parseJava(text) {
   } else if (res = regMsg.exec(text)) {
     info = {
       'message': res[1] + ': ' + res[2]
+    }
+  } else if (res = regServerMsg.exec(text)) {
+    info = {
+      'message': lang['server'] + ': ' + res[1]
     }
   }
   return info
