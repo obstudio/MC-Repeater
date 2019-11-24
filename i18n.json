@@ -1,0 +1,14 @@
+{
+  "en-us": {
+    "join": "joined the game",
+    "leave": "left the game",
+    "start": "Server started",
+    "stop": "Server stopped"
+  },
+  "zh-cn": {
+    "join": "加入了游戏",
+    "leave": "退出了游戏",
+    "start": "服务器已启动",
+    "stop": "服务器已关闭"
+  }
+}
