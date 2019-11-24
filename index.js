@@ -13,7 +13,7 @@ fs.watchFile(config.logFile, (curr, prev) => {
         if (err) throw err
         content = buffer.toString().split('\r\n').filter(s => s)
         info = content.map(parse).filter(s => s)
-        content.forEach(send)
+        info.forEach(send)
       })
 
       fs.close(fd, (err) => {
