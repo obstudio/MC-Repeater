@@ -6,10 +6,12 @@ function send(info) {
   const msg = info['message']
   if (msg) {
     const msgShort = msg.length > 20 ? msg.slice(0, 10) + msg.length + msg.slice(-10) : msg
-    const sign = crypto.createHash('md5').update(config.id + msgShort + salt + config.key).digest('hex')
+    const salt = crypto.randomBytes(4).toString('hex')
+    const sign = crypto.createHash('md5').update(config.channelId + msgShort + salt + config.key).digest('hex')
+    const path = `/subscribe/${config.channelId}?salt=${salt}&sign=${sign}&msg=${msg}`
     const options = {
       hostname: config.botServerHost,
-      path: `/subscribe/:${config.id}?salt=${salt}&sign=${sign}&msg=${msg}`,
+      path: `/subscribe/:${config.channelId}?salt=${salt}&sign=${sign}&msg=${msg}`,
     }
     https.get(options, (res) => {
       const { statusCode } = res
