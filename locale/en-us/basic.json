@@ -1,0 +1,9 @@
+{
+  "join": "$1 joined the game",
+  "leave": "$1 left the game",
+  "start": "Server started",
+  "stop": "Server stopped",
+  "msg": "$1: $2",
+  "server": "Server",
+  "makeAdvance": "$1 has made the advancement [$2]!"
+}

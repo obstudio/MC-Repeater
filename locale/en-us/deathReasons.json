@@ -1,0 +1,106 @@
+{
+  "arrow": "$1 was shot to death!",
+  "arrow-mob": "$1 was shot to death by $2!",
+  "arrow-mob-weapon": "$1 was shot to death by $2 using $3!",
+
+  "cactus": "$1 was pricked to death by cactus!",
+  "cactus-mob": "$1 walked into a cactus whilst trying to escape $2!",
+
+  "breath": "$1 was roasted in dragon breath.",
+  "breath-mob": "$1 was roasted in dragon breath by $2.",
+
+  "drown": "$1 was drowned to death!",
+  "drown-mob": "$1 was drowned to death whilst trying to escape $2!",
+
+  "suffocate": "$1 was suffocated to death!",
+  "suffocate-mob": "$1 was suffocated to death whilst fighting $2!",
+
+  "squash": "$1 was squashed!",
+  "squash-mob": "$1 was squashed by $2!",
+  "fightsquash-mob": "$1 was squashed whilst fighting $2!",
+
+  "aircrash": "$1 experienced kinetic energy!",
+  "aircrash-mob": "$1 experienced kinetic energy whilst trying to escape $2!",
+
+  "wingless-mob": "$1 removed an elytra while flying whilst trying to escape $2!",
+
+  "explode": "$1 blew up!",
+  "explode-mob": "$1 was blown up by $2!",
+  "explode-mob-weapon": "$1 was blown up by $2 using $3!",
+
+  "bedbomb": "$1 was killed by intentional game design!",
+
+  "fall": "$1 hit the ground too hard!",
+  "fall-mob": "$1 hit the ground too hard whilst trying to escape $2!",
+  "highfall": "$1 fell from a high place!",
+  "ladderfall": "$1 fell off a ladder!",
+  "vinefall": "$1 fell off some vines!",
+  "waterfall": "$1 fell out of the water!",
+  "firedrop": "$1 fell into a patch of fire!",
+  "cactusdrop": "$1 fell into a patch of cactus!",
+
+  "doomfall": "$1 was doomed to fall!",
+  "doomfall-mob": "$1 was doomed to fall by $2!",
+  "doomfall-mob-weapon": "$1 was doomed to fall by $2 using $3!",
+
+  "farfall-mob": "$1 fell too far and was finished by $2!",
+  "farfall-mob-weapon": "$1 fell too far and was finished by $2 using $3!",
+
+  "vineshot-mob": "$1 was shot off some vines by $2!",
+  "laddershot-mob": "$1 was shot off a ladder by $2!",
+  "blownoff-mob": "$1 was blown from a high place by $2!",
+
+  "selfburning": "$1 went up in flames!",
+  "selfburning-mob": "$1 walked into fire whilst fighting $2!",
+
+  "burned": "$1 was burned to a crisp.",
+  "burned-mob": "$1 was burned to a crisp whilst fighting $2.",
+
+  "fireworks": "$1 went off with a bang!",
+  "fireworks-mob": "$1 went off with a bang whilst fighting $2!",
+
+  "lava": "$1 tried to swim in lava.",
+  "lava-mob": "$1 tried to swim in lava to escape $2.",
+
+  "lightning": "$1 was struck by lightning!",
+  "lightning-mob": "$1 was struck by lightning whilst fighting $2!",
+
+  "magmablock": "$1 discovered the floor was lava.",
+  "magmablock-mob": "$1 walked into danger zone due to $2.",
+
+  "slain-mob": "$1 was slain by $2!",
+  "slain-mob-weapon": "$1 was slain by $2 using $3!",
+
+  "finished-mob": "$1 got finished off by $2!",
+  "finished-mob-weapon": "$1 got finished off by $2 using $3!",
+
+  "fireball-mob": "$1 was fireballed to death by $2!",
+  "fireball-mob-weapon": "$1 was fireballed to death by $2 using $3!",
+
+  "magic": "$1 was killed by magic!",
+  "magic-mob": "$1 was killed by $2 using magic!",
+
+  "starve": "$1 starved to death!",
+  "starve-mob": "$1 starved to death whilst fighting $2!",
+
+  "berry": "$1 was poked to death by a sweet berry bush!",
+  "berry-mob": "$1 was poked to death by a sweet berry bush whilst trying to escape $2!",
+
+  "thorn-mob": "$1 was killed by the recoil whilst trying to hurt $2!",
+  "thorn-mob-weapon": "$1 was killed by the recoil of $3 whilst trying to hurt $2!",
+
+  "trident-mob": "$1 was impaled by $2!",
+  "trident-mob-weapon": "$1 was impaled by $2 using $3!",
+
+  "fallout": "$1 fell out of the world.",
+  "fallout-mob": "$1 didn't want to live in the same world as $2.",
+
+  "wither": "$1 withered away.",
+  "wither-mob": "$1 withered away whilst fighting $2.",
+
+  "pummel-mob": "$1 was pummeled to death by $2!",
+  "pummel-mob-weapon": "$1 was pummeled to death by $2 using $3!",
+
+  "die": "$1 died!",
+  "die-mob": "$1 died because of $2!"
+}

@@ -1,0 +1,106 @@
+{
+  "arrow": "$1 被射杀了！",
+  "arrow-mob": "$1 被 $2 射杀了！",
+  "arrow-mob-weapon": "$1 被 $2 用 $3 射杀了！",
+
+  "cactus": "$1 被仙人掌戳死了！",
+  "cactus-mob": "$1 为了躲避 $2，毅然决然地一头撞向了仙人掌。",
+
+  "breath": "$1 被龙息烤成了全熟。",
+  "breath-mob": "$1 被 $2 的龙息烤成了全熟。",
+
+  "drown": "$1 淹死了！",
+  "drown-mob": "$1 在躲避 $2 时淹死了！",
+
+  "suffocate": "$1 窒息而亡！",
+  "suffocate-mob": "$1 在与 $2 战斗时窒息而亡！",
+
+  "squash": "$1 变成了美味的肉酱。",
+  "squash-mob": "$1 被 $2 挤成了美味的肉酱。",
+  "fightsquash-mob": "$1 在与 $2 战斗时变成了美味的肉酱。",
+
+  "aircrash": "$1 领悟到了什么是动能。",
+  "aircrash-mob": "$1 在躲避 $2 时领悟到了什么是动能。",
+
+  "wingless-mob": "$1 试着一边飞行逃离 $2 一边自断双翼。",
+
+  "explode": "$1 炸开了花！",
+  "explode-mob": "$1 被 $2 炸开了花！",
+  "explode-mob-weapon": "$1 被 $2 用 $3 炸开了花！",
+
+  "bedbomb": "$1 死于游戏作者的恶趣味！",
+
+  "fall": "$1 一个信仰之跃，成功跳入了死神的怀抱。",
+  "fall-mob": "$1 为了躲避 $2 而一个信仰之跃，成功跳入了死神的怀抱。",
+  "highfall": "$1 天仙下凡，脸先着地。",
+  "ladderfall": "$1 掉下了梯子！",
+  "vinefall": "$1 掉下了藤蔓！",
+  "waterfall": "$1 掉出了水的保护层！",
+  "firedrop": "$1 一个猛子扎进烈火之中！",
+  "cactusdrop": "$1 一个猛子扎进仙人掌堆！",
+
+  "doomfall": "$1 只能眼睁睁看着自己摔死。",
+  "doomfall-mob": "$1 被 $2 害得只能眼睁睁看着自己摔死。",
+  "doomfall-mob-weapon": "$1 被 $2 用 $3 害得只能眼睁睁看着自己摔死。",
+
+  "farfall-mob": "$1 摔得生不如死，被 $2 人道处决。",
+  "farfall-mob-weapon": "$1 摔得生不如死，被 $2 用 $3 人道处决。",
+
+  "vineshot-mob": "$1 被 $2 从藤蔓上一箭击落！",
+  "laddershot-mob": "$1 被 $2 从梯子上一箭击落！",
+  "blownoff-mob": "$1 被 $2 击下凡间，脸先着地。",
+
+  "selfburning": "$1 浴火焚身。",
+  "selfburning-mob": "$1 在与 $2 战斗时冲进了烈火。",
+
+  "burned": "$1 被烤得酥脆。",
+  "burned-mob": "$1 在与 $2 战斗时被烤得酥脆。",
+
+  "fireworks": "$1 上天了，成为了夜空中最亮的星！",
+  "fireworks-mob": "$1 在与 $2 战斗时上天了，成为了夜空中最亮的星！",
+
+  "lava": "$1 试图在熔岩里游泳。",
+  "lava-mob": "$1 为躲避 $2 而试图在熔岩里游泳。",
+
+  "lightning": "$1 接受了天罚！",
+  "lightning-mob": "$1 在与 $2 战斗时接受了天罚！",
+
+  "magmablock": "$1 发现了地板是熔岩做的。",
+  "magmablock-mob": "$1 被 $2 赶入了滚热的死亡领域。",
+
+  "slain-mob": "$1 被 $2 杀死了！",
+  "slain-mob-weapon": "$1 被 $2 用 $3 杀死了！",
+
+  "finished-mob": "$1 被 $2 补掉了！",
+  "finished-mob-weapon": "$1 被 $2 用 $3 补掉了！",
+
+  "fireball-mob": "$1 被 $2 用火球烧死了！",
+  "fireball-mob-weapon": "$1 被 $2 用 $3 发射的火球烧死了！",
+
+  "magic": "$1 被魔法杀死了！",
+  "magic-mob": "$1 被 $2 用魔法杀死了！",
+
+  "starve": "$1 饿死了！",
+  "starve-mob": "$1 在与 $2 战斗时饿死了！",
+
+  "berry": "$1 被甜浆果丛刺死了！",
+  "berry-mob": "$1 为了躲避 $2 而被甜浆果丛刺死了！",
+
+  "thorn-mob": "$1 试图攻击 $2，被反弹伤害弹死了！",
+  "thorn-mob-weapon": "$1 试图攻击 $2，被 $3 反弹伤害弹死了！",
+
+  "trident-mob": "$1 被 $2 捅个对穿！",
+  "trident-mob-weapon": "$1 被 $2 用 $3 捅个对穿！",
+
+  "fallout": "$1 掉出了这个世界。",
+  "fallout-mob": "$1 与 $2 不共戴天。",
+
+  "wither": "$1 凋谢了。",
+  "wither-mob": "$1 在与 $2 战斗时凋谢了。",
+
+  "pummel-mob": "$1 被 $2 砸死了！",
+  "pummel-mob-weapon": "$1 被 $2 用 $3 砸死了！",
+
+  "die": "$1 死了！",
+  "die-mob": "$1 死于 $2！"
+}

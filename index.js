@@ -1,8 +1,9 @@
 const fs = require('fs')
 const Iconv = require('iconv').Iconv
-const config = require('./config.json')
+const config = require('./config')
 const parse = require('./parse')
 const send = require('./send')
+const os = require('os')
 
 const gbk2utf8 = new Iconv('GBK', 'UTF-8')
 
@@ -14,7 +15,14 @@ fs.watchFile(config.logFile, (curr, prev) => {
       buffer = Buffer.alloc(curr.size - prev.size)
       fs.read(fd, buffer, 0, curr.size - prev.size, prev.size, (err, bytesRead, buffer) => {
         if (err) throw err
-        content = gbk2utf8.convert(buffer).toString().split('\r\n').filter(s => s)
+
+        let content
+        if (os.type() === 'Windows_NT') {
+          content = gbk2utf8.convert(buffer).toString().split('\r\n').filter(s => s)
+        } else {
+          content = buffer.toString().split('\n').filter(s => s)
+        }
+
         info = content.map(parse).filter(s => s)
         info.forEach(send)
       })
