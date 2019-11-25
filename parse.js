@@ -312,6 +312,7 @@ function parseJava(text) {
   const regStop = /^Stopping the server$/
   const regMsg = new RegExp(`^<(${vchar}+)> (.+)$`)
   const regServerMsg = new RegExp(`^\\[(${vchar}+)\\] (.+)$`)
+  const regAdvance = new RegExp(`^(${vchar}+) has (?:made the advancement|reached the goal|completed a challenge) \\[(.+)\\]$`)
   info = undefined
   if (res = regJoin.exec(text)) {
     info = {
@@ -339,6 +340,15 @@ function parseJava(text) {
     }
     info = {
       message: translate(lang.msg, res)
+    }
+  } else if (res = regAdvance.exec(text)) {
+    res[2] = lang.advancements[res[2]]
+    info = {
+      message: translate(lang.makeAdvance, res)
+    }
+  } else if (res = parseDeath(text)) {
+    info = {
+      message: translate(lang.deathReasons[res[0]], res)
     }
   }
   return info
