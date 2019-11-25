@@ -310,8 +310,8 @@ function parseJava(text) {
   const regLeave = new RegExp(`^(${vchar}+) left the game$`)
   const regStart = /^Done \([0-9\.]+s\)! For help, type "help"$/
   const regStop = /^Stopping the server$/
-  const regMsg = new RegExp(`^<(${vchar}+>: (.+)$`)
-  const regServerMsg = new RegExp(`^\[(${vchar})+\] (.+)$`)
+  const regMsg = new RegExp(`^<(${vchar}+)>: (.+)$`)
+  const regServerMsg = new RegExp(`^\\[(${vchar}+)\\] (.+)$`)
   info = undefined
   if (res = regJoin.exec(text)) {
     info = {
