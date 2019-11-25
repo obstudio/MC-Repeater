@@ -5,5 +5,5 @@
   "stop": "Server stopped",
   "msg": "$1: $2",
   "server": "Server",
-  "makeAdvance": "$1 has made the advancement [$2]!"
+  "makeAdvance": "$1 has made the advancement [$2]"
 }
