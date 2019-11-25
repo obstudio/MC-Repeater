@@ -1,2 +1,4 @@
 node_modules
 config.json
+locale/zh-cn/custom.json
+locale/en-us/custom.json
