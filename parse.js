@@ -312,7 +312,7 @@ function parseJava(text) {
   const regStop = /^Stopping the server$/
   const regMsg = new RegExp(`^<(${vchar}+)> (.+)$`)
   const regServerMsg = new RegExp(`^\\[(${vchar}+)\\] (.+)$`)
-  const regAdvance = new RegExp(`^(${vchar}+) has (?:made the advancement|reached the goal|completed a challenge) \\[(.+)\\]$`)
+  const regAdvance = new RegExp(`^(${vchar}+) has (?:made the advancement|reached the goal|completed the challenge) \\[(.+)\\]$`)
   info = undefined
   if (res = regJoin.exec(text)) {
     info = {
