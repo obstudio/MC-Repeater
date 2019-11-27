@@ -1,7 +1,7 @@
 {
-  "name": "mc-repeater",
+  "name": "mcrepeater",
   "version": "0.0.1",
-  "description": "",
+  "description": "A chat relay between Minecraft server and IRC with no mods.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

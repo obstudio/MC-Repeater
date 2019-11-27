@@ -1,7 +1,7 @@
 const config = require('./config')
 const locale = require('./locale')
 
-const lang = locale[config.language]
+const lang = locale[config.language.trim().toLowerCase()]
 
 const vchar = '[^\\s\\$:;<>\\[\\]\\(\\)\\-\\,\\.\\{\\}+=*!?/\\\\|`~@#%^&\'"]'
 const mob = `${vchar}+(?: [A-Z][a-z]*)?`

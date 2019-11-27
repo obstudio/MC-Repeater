@@ -15,7 +15,7 @@ function sendKoishi(info) {
   if (msg) {
     const msgShort = msg.length > 20 ? msg.slice(0, 10) + msg.length + msg.slice(-10) : msg
     const salt = crypto.randomBytes(4).toString('hex')
-    const sign = crypto.createHash('md5').update(config.channelId + msgShort + salt + config.key).digest('hex')
+    const sign = crypto.createHmac('sha1', config.key).update(msgShort + salt).digest('hex')
     const path = `${config.botPath}?salt=${salt}&sign=${sign}&msg=${encodeURIComponent(msg)}`
     const options = {
       hostname: config.botHost,
