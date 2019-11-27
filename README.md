@@ -28,7 +28,7 @@ Here's an example `config.json` for Koishi bot:
   "botHost": "bot.your-host.com",
   "botPath": "/bot/request/path",
   "key": "your-secret-key",
-  "language": "enUS"
+  "language": "en-us"
 }
 ```
 
