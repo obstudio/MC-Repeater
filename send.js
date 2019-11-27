@@ -3,14 +3,22 @@ const crypto = require('crypto')
 const config = require('./config')
 
 function send(info) {
+  switch (config.botType.trim().toLowerCase()) {
+    case 'koishi':
+    default:
+      return sendKoishi(info)
+  }
+}
+
+function sendKoishi(info) {
   const msg = info.message
   if (msg) {
     const msgShort = msg.length > 20 ? msg.slice(0, 10) + msg.length + msg.slice(-10) : msg
     const salt = crypto.randomBytes(4).toString('hex')
     const sign = crypto.createHash('md5').update(config.channelId + msgShort + salt + config.key).digest('hex')
-    const path = `/webhook/channel/${config.channelId}?salt=${salt}&sign=${sign}&msg=${encodeURIComponent(msg)}`
+    const path = `${config.botPath}?salt=${salt}&sign=${sign}&msg=${encodeURIComponent(msg)}`
     const options = {
-      hostname: config.botServerHost,
+      hostname: config.botHost,
       path: path,
     }
     https.get(options, (res) => {

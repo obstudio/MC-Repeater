@@ -1,7 +1,5 @@
-const enUS = require('./en-us')
-const zhCN = require('./zh-cn')
+locale = {}
+locale['en-us'] = require('./en-us')
+locale['zh-cn'] = require('./zh-cn')
 
-module.exports = {
-  enUS,
-  zhCN
-}
+module.exports = locale
