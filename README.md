@@ -10,12 +10,25 @@ A chat relay between Minecraft server and IRC with no mods.
 + Support vanilla and paper servers
 + Can be run on Windows, Linux and macOS
 
+### Chat bot support
+
++ Koishi bot (for QQ)
+
+### Messages can be forwarded
+
++ Chat
++ `/say` message
++ Server start up / shutdown
++ Player join / leave
++ Player death
++ Achievement
+
 ## Usage
 
 1. Install [NodeJS](https://nodejs.org/)
-1. Clone this repository
-2. Create `config.json` and write configurations in it
-3. Run `index.js` using `node .`
+2. Clone this repository
+3. Create `config.json` and write configurations in it
+4. Run `index.js` using `node .`
 
 ## Configurations
 
