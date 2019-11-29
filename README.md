@@ -29,6 +29,7 @@ A chat relay between Minecraft server and IRC with no mods.
 2. Clone this repository
 3. Create `config.json` and write configurations in it
 4. Run `index.js` in your server directory using `node`.
+5. Using `stopMCRepeater` command to stop it.
 
 ## Configurations
 
