@@ -38,6 +38,8 @@ Here's an example `config.json` for Koishi bot:
 {
   "logFile": "/path/to/mc-server/logs/latest.log",
   "serverType": "java",
+  "serverStartFile": "/path/to/mc-server/start-server.sh",
+  "botType": "koishi",
   "botHost": "bot.your-host.com",
   "botPath": "/bot/request/path",
   "key": "your-secret-key",
@@ -49,6 +51,8 @@ Here's an example `config.json` for Koishi bot:
 
 + **logFile:** Path to your Minecraft server latest log file.
 + **serverType:** Type of your server. Can be `java` or `paper`.
++ **serverStartFile:** Path to your Minecraft server starting bash/batch file.
++ **botType:** Your bot type. Can be `koishi` or `local`
 + **botHost:** Hostname of your bot server.
 + **botPath:** Your request path to send information to. For Koishi, it's usually `/webhook/channel/your-channel`.
 + **key:** Your secret key to sign the information. Usually provided by your bot.

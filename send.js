@@ -4,6 +4,8 @@ const config = require('./config')
 
 function send(info) {
   switch (config.botType.trim().toLowerCase()) {
+    case 'local':
+      return sendLocal(info)
     case 'koishi':
     default:
       return sendKoishi(info)
@@ -25,6 +27,12 @@ function sendKoishi(info) {
       const { statusCode } = res
       if (statusCode !== 200) console.log('Request sending failed')
     })
+  }
+}
+
+function sendLocal(info) {
+  if (info.message) {
+    console.log(info.message);
   }
 }
 
