@@ -23,8 +23,11 @@ fs.watchFile(config.logFile, (curr, prev) => {
           content = buffer.toString().split('\n').filter(s => s)
         }
 
-        info = content.map(parse).filter(s => s)
-        info.forEach(send)
+        data = content.map(parse).filter(s => s)
+        for (const info of data) {
+          // you may add filter here
+          send(info.msg)
+        }
       })
 
       fs.close(fd, (err) => {
