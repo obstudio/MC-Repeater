@@ -49,6 +49,8 @@ Here's an example `config.json` for Koishi bot:
 
 ### Parameters
 
+Parameters with default values are optional.
+
 + **logFile:** Path to your Minecraft server latest log file.
 + **serverType:** Type of your server. Can be `java` or `paper`.
 + **serverStartFile:** Path to your Minecraft server starting bash/batch file.
@@ -57,3 +59,5 @@ Here's an example `config.json` for Koishi bot:
 + **botPath:** Your request path to send information to. For Koishi, it's usually `/webhook/channel/your-channel`.
 + **key:** Your secret key to sign the information. Usually provided by your bot.
 + **language:** Your language. Currently support `en-us` and `zh-cn`.
++ **botType:** Type for your bot. It determines how the message will be sent (default: `koishi`).
++ **throttleInterval:** The minimum interval at which messages are sent (default: `0`).
