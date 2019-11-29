@@ -372,7 +372,7 @@ function parsePaper(text) {
     const regStart = /^Done \([0-9\.]+s\)! For help, type "help"$/
     const regStop = /^Stopping server$/
     const regServerMsg = new RegExp(`^\\[(${vchar}+)\\] (.+)$`)
-    const regAdvance = new RegExp(`^(${vchar}+) has (?:made the advancement|reached the goal|completed a challenge) \\[(.+)\\]$`)
+    const regAdvance = new RegExp(`^(${vchar}+) has (?:made the advancement|reached the goal|completed the challenge) \\[(.+)\\]$`)
 
     if (serverInfoResult = regJoin.exec(text)) {
       info = {

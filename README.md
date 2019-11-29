@@ -10,12 +10,25 @@ A chat relay between Minecraft server and IRC with no mods.
 + Support vanilla and paper servers
 + Can be run on Windows, Linux and macOS
 
+### Chat bot support
+
++ Koishi bot (for QQ)
+
+### Messages can be forwarded
+
++ Chat
++ `/say` message
++ Server start up / shutdown
++ Player join / leave
++ Player death
++ Achievement
+
 ## Usage
 
 1. Install [NodeJS](https://nodejs.org/)
-1. Clone this repository
-2. Create `config.json` and write configurations in it
-3. Run `index.js` using `node .`
+2. Clone this repository
+3. Create `config.json` and write configurations in it
+4. Run `index.js` using `node .`
 
 ## Configurations
 
@@ -25,6 +38,8 @@ Here's an example `config.json` for Koishi bot:
 {
   "logFile": "/path/to/mc-server/logs/latest.log",
   "serverType": "java",
+  "serverStartFile": "/path/to/mc-server/start-server.sh",
+  "botType": "koishi",
   "botHost": "bot.your-host.com",
   "botPath": "/bot/request/path",
   "key": "your-secret-key",
@@ -38,6 +53,8 @@ Parameters with default values are optional.
 
 + **logFile:** Path to your Minecraft server latest log file.
 + **serverType:** Type of your server. Can be `java` or `paper`.
++ **serverStartFile:** Path to your Minecraft server starting bash/batch file.
++ **botType:** Your bot type. Can be `koishi` or `local`
 + **botHost:** Hostname of your bot server.
 + **botPath:** Your request path to send information to. For Koishi, it's usually `/webhook/channel/your-channel`.
 + **key:** Your secret key to sign the information. Usually provided by your bot.

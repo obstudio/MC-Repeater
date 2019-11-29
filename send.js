@@ -32,7 +32,7 @@ const builtinSenders = {
     const path = `${config.botPath}?salt=${salt}&sign=${sign}&msg=${encodeURIComponent(msg)}`
     const options = {
       hostname: config.botHost,
-      path: path,
+      path: path
     }
     return new Promise((resolve, reject) => {
       https.get(options, (response) => {
@@ -42,6 +42,11 @@ const builtinSenders = {
       })
     })
   },
+  sendLocal(msg) {
+    if (msg) {
+      console.log(msg);
+    }
+  }
 }
 
 module.exports = send
