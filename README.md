@@ -28,7 +28,7 @@ A chat relay between Minecraft server and IRC with no mods.
 1. Install [NodeJS](https://nodejs.org/)
 2. Clone this repository
 3. Create `config.json` and write configurations in it
-4. Run `index.js` using `node .`
+4. Run `index.js` in your server directory using `node`.
 
 ## Configurations
 
@@ -36,14 +36,15 @@ Here's an example `config.json` for Koishi bot:
 
 ```json
 {
-  "logFile": "/path/to/mc-server/logs/latest.log",
-  "serverType": "java",
   "serverStartFile": "/path/to/mc-server/start-server.sh",
+  "autoRestart": true,
+  "serverType": "java",
   "botType": "koishi",
   "botHost": "bot.your-host.com",
   "botPath": "/bot/request/path",
   "key": "your-secret-key",
-  "language": "en-us"
+  "language": "en-us",
+  "throttleInterval": 5000
 }
 ```
 
@@ -51,13 +52,12 @@ Here's an example `config.json` for Koishi bot:
 
 Parameters with default values are optional.
 
-+ **logFile:** Path to your Minecraft server latest log file.
-+ **serverType:** Type of your server. Can be `java` or `paper`.
 + **serverStartFile:** Path to your Minecraft server starting bash/batch file.
-+ **botType:** Your bot type. Can be `koishi` or `local`
++ **autoRestart:** A boolean value which determine whether the MC-Repeater will auto restart your server after your server stopped (default: `false`).
++ **serverType:** Type of your server. Can be `java` or `paper`.
++ **botType:** Your bot type which determines how the message will be sent. Can be `koishi` or `local` (default: `koishi`)
 + **botHost:** Hostname of your bot server.
 + **botPath:** Your request path to send information to. For Koishi, it's usually `/webhook/channel/your-channel`.
 + **key:** Your secret key to sign the information. Usually provided by your bot.
 + **language:** Your language. Currently support `en-us` and `zh-cn`.
-+ **botType:** Type for your bot. It determines how the message will be sent (default: `koishi`).
 + **throttleInterval:** The minimum interval at which messages are sent (default: `0`).
