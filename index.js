@@ -1,38 +1,59 @@
-const fs = require('fs')
-const Iconv = require('iconv').Iconv
 const config = require('./config')
+const Iconv = require('iconv').Iconv
 const parse = require('./parse')
 const send = require('./send')
 const os = require('os')
+const process = require('process')
+const { execFile } = require('child_process')
 
 const gbk2utf8 = new Iconv('GBK', 'UTF-8')
 
-fs.watchFile(config.logFile, (curr, prev) => {
-  if (curr.size - prev.size > 0) {
-    fs.open(config.logFile, 'r', (err, fd) => {
-      if (err) throw err
-
-      buffer = Buffer.alloc(curr.size - prev.size)
-      fs.read(fd, buffer, 0, curr.size - prev.size, prev.size, (err, bytesRead, buffer) => {
-        if (err) throw err
-
-        let content
-        if (os.type() === 'Windows_NT') {
-          content = gbk2utf8.convert(buffer).toString().split('\r\n').filter(s => s)
-        } else {
-          content = buffer.toString().split('\n').filter(s => s)
+var autoRestart = config.autoRestart
+function newServerProcess() {
+    return execFile(config.serverStartFile, (error) => {
+        if (error) {
+            throw error
         }
-
-        data = content.map(parse).filter(s => s)
-        for (const info of data) {
-          // you may add filter here
-          send(info.msg)
-        }
-      })
-
-      fs.close(fd, (err) => {
-        if (err) throw err
-      })
+        serverProcessStopped()
     })
-  }
+}
+
+function serverProcessInit() {
+    //when serverProcess have output message
+    serverProcess.stdout.on('data', (data) => {
+        var content = os.type() === 'Windows_NT' ? gbk2utf8.convert(data).toString().trim() : data.toString().trim()
+        if (content) {
+            console.log(content)
+        }        info = parse(content)
+        if (info) {
+            send(info.message)
+        }
+
+    })
+
+    //send the parent process input to serverProcess input
+    process.stdin.pipe(serverProcess.stdin)
+
+}
+
+function serverProcessStopped() {
+    if (autoRestart) {
+        console.log('Server is restarting.')
+        serverProcess = newServerProcess()
+        serverProcessInit()
+    } else {
+        console.log('MC-Repeater stopped.')
+        process.exit()
+    }
+}
+
+process.stdin.on('data', (data) => {
+    if (data.toString().trim() === 'stopMCRepeater') {
+        autoRestart = false
+        serverProcess.stdin.write(os.type() === 'Windows_NT' ? 'stop\r\n' : 'stop\n')
+    }
 })
+
+//create mc server child process
+var serverProcess = newServerProcess()
+serverProcessInit()
