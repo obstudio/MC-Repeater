@@ -13,7 +13,7 @@ let serverProcess
 
 let autoRestart = config.autoRestart
 function newServerProcess() {
-  return child_process.execFile(config.serverStartFile, {encoding: 'buffer'}, (error) => {
+  return child_process.execFile(config.serverStartFile, { encoding: 'buffer' }, (error) => {
     if (error) {
       throw error
     }
@@ -30,7 +30,11 @@ function serverProcessInit() {
     }
     info = parse(content)
     if (info) {
-      send(info.message)
+      try {
+        send(info.message)
+      } catch (error) {
+        console.log(error)
+      }
     }
   })
 
