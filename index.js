@@ -5,7 +5,10 @@ const parse = require('./parse')
 const send = require('./send')
 const os = require('os')
 
+const OFFLINE_TIMEOUT = (config.offlineTimeout || 0) * 1000
+
 const gbk2utf8 = new Iconv('GBK', 'UTF-8')
+const offlinePlayers = new Set()
 
 fs.watchFile(config.logFile, (curr, prev) => {
   if (curr.size - prev.size > 0) {
@@ -25,8 +28,17 @@ fs.watchFile(config.logFile, (curr, prev) => {
 
         data = content.map(parse).filter(s => s)
         for (const info of data) {
-          // you may add filter here
-          send(info.msg)
+          if (info.type === 'leave') {
+            offlinePlayers.add(info.target)
+            setTimeout(() => {
+              if (offlinePlayers.delete(info.target)) send(info.msg)
+            }, OFFLINE_TIMEOUT)
+          } else {
+            if (info.type === 'join') {
+              if (offlinePlayers.delete(info.target)) return
+            }
+            send(info.msg)
+          }
         }
       })
 
