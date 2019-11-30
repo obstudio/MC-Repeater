@@ -6,7 +6,11 @@ const os = require('os')
 const process = require('process')
 const child_process = require('child_process')
 
+const OFFLINE_TIMEOUT = (config.offlineTimeout || 0) * 1000
+
 const gbk2utf8 = new Iconv('GBK', 'UTF-8')
+const offlinePlayers = new Set()
+
 const isWindows = os.type() === 'Windows_NT'
 
 let serverProcess
@@ -30,10 +34,20 @@ function serverProcessInit() {
     }
     info = parse(content)
     if (info) {
-      try {
-        send(info.message)
-      } catch (error) {
-        console.log(error)
+      if (info.type === 'leave' && OFFLINE_TIMEOUT) {
+        offlinePlayers.add(info.target)
+        setTimeout(() => {
+          if (offlinePlayers.delete(info.target)) send(info.msg)
+        }, OFFLINE_TIMEOUT)
+      } else {
+        if (info.type === 'join') {
+          if (offlinePlayers.delete(info.target)) return
+        }
+        try {
+          send(info.msg)          
+        } catch (error) {
+          console.log(error)
+        }
       }
     }
   })

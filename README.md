@@ -62,3 +62,4 @@ Parameters with default values are optional.
 + **key:** Your secret key to sign the information. Usually provided by your bot.
 + **language:** Your language. Currently support `en-us` and `zh-cn`.
 + **throttleInterval:** The minimum interval at which messages are sent (default: `0`).
++ **offlineTimeout:** The minimum time to determine a player is offline (default: `0`).

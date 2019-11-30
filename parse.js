@@ -316,22 +316,29 @@ function parseJava(text) {
   info = undefined
   if (res = regJoin.exec(text)) {
     info = {
+      type: 'join',
+      target: res[1],
       message: translate(lang.join, res)
     }
   } else if (res = regLeave.exec(text)) {
     info = {
+      type: 'leave',
+      target: res[1],
       message: translate(lang.leave, res)
     }
   } else if (regStart.exec(text)) {
     info = {
+      type: 'start',
       message: lang.start
     }
   } else if (regStop.exec(text)) {
     info = {
+      type: 'stop',
       message: lang.stop
     }
   } else if (res = regMsg.exec(text)) {
     info = {
+      type: 'chat',
       message: translate(lang.msg, res)
     }
   } else if (res = regServerMsg.exec(text)) {
@@ -339,15 +346,18 @@ function parseJava(text) {
       res[1] = lang.server
     }
     info = {
+      type: 'server',
       message: translate(lang.msg, res)
     }
   } else if (res = regAdvance.exec(text)) {
     res[2] = lang.advancements[res[2]]
     info = {
+      type: 'advance',
       message: translate(lang.makeAdvance, res)
     }
   } else if (res = parseDeath(text)) {
     info = {
+      type: 'death',
       message: translate(lang.deathReasons[res[0]], res)
     }
   }
@@ -377,18 +387,24 @@ function parsePaper(text) {
 
     if (serverInfoResult = regJoin.exec(text)) {
       info = {
+        type: 'join',
+        target: serverInfoResult[1],
         message: translate(lang.join, serverInfoResult)
       }
     } else if (serverInfoResult = regLeave.exec(text)) {
       info = {
+        type: 'leave',
+        target: serverInfoResult[1],
         message: translate(lang.leave, serverInfoResult)
       }
     } else if (regStart.exec(text)) {
       info = {
+        type: 'start',
         message: lang.start
       }
     } else if (regStop.exec(text)) {
       info = {
+        type: 'stop',
         message: lang.stop
       }
     } else if (serverInfoResult = regServerMsg.exec(text)) {
@@ -396,19 +412,23 @@ function parsePaper(text) {
         serverInfoResult[1] = lang.server
       }
       info = {
+        type: 'server',
         message: translate(lang.msg, serverInfoResult)
       }
     } else if (serverInfoResult = regAdvance.exec(text)) {
       serverInfoResult[2] = lang.advancements[serverInfoResult[2]]
       info = {
+        type: 'advance',
         message: translate(lang.makeAdvance, serverInfoResult)
       }
     } else if (serverInfoResult = parseDeath(text)) {
       info = {
+        type: 'death',
         message: translate(lang.deathReasons[serverInfoResult[0]], serverInfoResult)
       }
     } else if (serverInfoResult = regMsg.exec(text)) {
       info = {
+        type: 'chat',
         message: translate(lang.msg, serverInfoResult)
       }
     }
