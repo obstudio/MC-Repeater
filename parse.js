@@ -359,7 +359,7 @@ function parsePaper(text) {
 
   let info
 
-  const serverInfo = /^\[\d{2}:\d{2}:\d{2}\] \[Server thread\/INFO\]: (.+)$/
+  const serverInfo = /^\[\d{2}:\d{2}:\d{2} INFO\]: (.+)$/
   let serverInfoResult = serverInfo.exec(text)
 
   const chatInfo = /^\[\d{2}:\d{2}:\d{2}\] \[Async Chat Thread - #\d+\/INFO\]: (.+)$/
@@ -373,6 +373,7 @@ function parsePaper(text) {
     const regStop = /^Stopping server$/
     const regServerMsg = new RegExp(`^\\[(${vchar}+)\\] (.+)$`)
     const regAdvance = new RegExp(`^(${vchar}+) has (?:made the advancement|reached the goal|completed the challenge) \\[(.+)\\]$`)
+    const regMsg = new RegExp(`^<(${vchar}+)> (.+)$`)
 
     if (serverInfoResult = regJoin.exec(text)) {
       info = {
@@ -406,14 +407,9 @@ function parsePaper(text) {
       info = {
         message: translate(lang.deathReasons[serverInfoResult[0]], serverInfoResult)
       }
-    }
-  } else if (chatInfoResult) {
-    text = chatInfoResult[1]
-    const regMsg = new RegExp(`^<(${vchar}+)> (.+)$`)
-
-    if (chatInfoResult = regMsg.exec(text)) {
+    } else if (serverInfoResult = regMsg.exec(text)) {
       info = {
-        message: translate(lang.msg, chatInfoResult)
+        message: translate(lang.msg, serverInfoResult)
       }
     }
   }

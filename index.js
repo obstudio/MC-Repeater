@@ -9,6 +9,8 @@ const child_process = require('child_process')
 const gbk2utf8 = new Iconv('GBK', 'UTF-8')
 const isWindows = os.type() === 'Windows_NT'
 
+let serverProcess
+
 let autoRestart = config.autoRestart
 function newServerProcess() {
   return child_process.execFile(config.serverStartFile, {encoding: 'buffer'}, (error) => {
@@ -55,5 +57,5 @@ process.stdin.on('data', (data) => {
 })
 
 //create mc server child process
-let serverProcess = newServerProcess()
+serverProcess = newServerProcess()
 serverProcessInit()
