@@ -45,7 +45,8 @@ Here's an example `config.json` for Koishi bot:
   "botPath": "/bot/request/path",
   "key": "your-secret-key",
   "language": "en-us",
-  "throttleInterval": 5000
+  "throttleInterval": 5,
+  "offlineTimeout": 10,
 }
 ```
 

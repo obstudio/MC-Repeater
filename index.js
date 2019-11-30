@@ -37,14 +37,20 @@ function serverProcessInit() {
       if (info.type === 'leave' && OFFLINE_TIMEOUT) {
         offlinePlayers.add(info.target)
         setTimeout(() => {
-          if (offlinePlayers.delete(info.target)) send(info.msg)
+          if (offlinePlayers.delete(info.target)) {
+            try {
+              send(info.message)
+            } catch (error) {
+              console.log(error)
+            }
+          }
         }, OFFLINE_TIMEOUT)
       } else {
         if (info.type === 'join') {
           if (offlinePlayers.delete(info.target)) return
         }
         try {
-          send(info.msg)          
+          send(info.message)          
         } catch (error) {
           console.log(error)
         }
