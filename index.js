@@ -1,50 +1,79 @@
-const fs = require('fs')
-const Iconv = require('iconv').Iconv
 const config = require('./config')
+const Iconv = require('iconv').Iconv
 const parse = require('./parse')
 const send = require('./send')
 const os = require('os')
+const process = require('process')
+const child_process = require('child_process')
 
 const OFFLINE_TIMEOUT = (config.offlineTimeout || 0) * 1000
 
 const gbk2utf8 = new Iconv('GBK', 'UTF-8')
 const offlinePlayers = new Set()
 
-fs.watchFile(config.logFile, (curr, prev) => {
-  if (curr.size - prev.size > 0) {
-    fs.open(config.logFile, 'r', (err, fd) => {
-      if (err) throw err
+const isWindows = os.type() === 'Windows_NT'
 
-      buffer = Buffer.alloc(curr.size - prev.size)
-      fs.read(fd, buffer, 0, curr.size - prev.size, prev.size, (err, bytesRead, buffer) => {
-        if (err) throw err
+let serverProcess
 
-        let content
-        if (os.type() === 'Windows_NT') {
-          content = gbk2utf8.convert(buffer).toString().split('\r\n').filter(s => s)
-        } else {
-          content = buffer.toString().split('\n').filter(s => s)
+let autoRestart = config.autoRestart
+function newServerProcess() {
+  return child_process.execFile(config.serverStartFile, { encoding: 'buffer' }, (error) => {
+    if (error) {
+      throw error
+    }
+    serverProcessStopped()
+  })
+}
+
+function serverProcessInit() {
+  //when serverProcess have output message
+  serverProcess.stdout.on('data', (data) => {
+    const content = isWindows ? gbk2utf8.convert(data).toString().trim() : data.toString().trim()
+    if (content) {
+      console.log(content)
+    }
+    info = parse(content)
+    if (info) {
+      if (info.type === 'leave' && OFFLINE_TIMEOUT) {
+        offlinePlayers.add(info.target)
+        setTimeout(() => {
+          if (offlinePlayers.delete(info.target)) send(info.msg)
+        }, OFFLINE_TIMEOUT)
+      } else {
+        if (info.type === 'join') {
+          if (offlinePlayers.delete(info.target)) return
         }
-
-        data = content.map(parse).filter(s => s)
-        for (const info of data) {
-          if (info.type === 'leave' && OFFLINE_TIMEOUT) {
-            offlinePlayers.add(info.target)
-            setTimeout(() => {
-              if (offlinePlayers.delete(info.target)) send(info.msg)
-            }, OFFLINE_TIMEOUT)
-          } else {
-            if (info.type === 'join') {
-              if (offlinePlayers.delete(info.target)) return
-            }
-            send(info.msg)
-          }
+        try {
+          send(info.msg)          
+        } catch (error) {
+          console.log(error)
         }
-      })
+      }
+    }
+  })
 
-      fs.close(fd, (err) => {
-        if (err) throw err
-      })
-    })
+  //send the parent process input to serverProcess input
+  process.stdin.pipe(serverProcess.stdin)
+}
+
+function serverProcessStopped() {
+  if (autoRestart) {
+    console.log('Server is restarting.')
+    serverProcess = newServerProcess()
+    serverProcessInit()
+  } else {
+    console.log('MC-Repeater stopped.')
+    process.exit()
+  }
+}
+
+process.stdin.on('data', (data) => {
+  if (data.toString().trim() === 'stopMCRepeater') {
+    autoRestart = false
+    serverProcess.stdin.write(isWindows ? 'stop\r\n' : 'stop\n')
   }
 })
+
+//create mc server child process
+serverProcess = newServerProcess()
+serverProcessInit()
