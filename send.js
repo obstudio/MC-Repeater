@@ -42,8 +42,9 @@ const builtinSenders = {
       })
     })
   },
+
   local(msg) {
-    console.log(msg);
+    console.log(msg)
   }
 }
 
