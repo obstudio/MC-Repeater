@@ -61,3 +61,4 @@ Parameters with default values are optional.
 + **language:** Your language. Currently support `en-us` and `zh-cn`.
 + **botType:** Type for your bot. It determines how the message will be sent (default: `koishi`).
 + **throttleInterval:** The minimum interval at which messages are sent (default: `0`).
++ **offlineTimeout:** The minimum time to determine a player is offline (default: `0`).

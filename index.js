@@ -28,7 +28,7 @@ fs.watchFile(config.logFile, (curr, prev) => {
 
         data = content.map(parse).filter(s => s)
         for (const info of data) {
-          if (info.type === 'leave') {
+          if (info.type === 'leave' && OFFLINE_TIMEOUT) {
             offlinePlayers.add(info.target)
             setTimeout(() => {
               if (offlinePlayers.delete(info.target)) send(info.msg)
