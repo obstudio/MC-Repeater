@@ -27,9 +27,16 @@ A chat relay between Minecraft server and IRC with no mods.
 
 1. Install [NodeJS](https://nodejs.org/).
 2. Install MC-Repeater globally using `npm install -g mcrepeater`.
-3. In your Minecraft server directory, create a bash / batch file (e.g. `start.sh` or `start.bat`), then write your Minecraft start command in it. MC-Repeater will automatically start the Minecraft server using this command.
-4. Create `config.json` in the same directory and write configurations (see below) in it.
-5. Run MC-Repeater with the command `mcrepeater`.
+3. In your Minecraft server directory, create a bash / batch file (e.g. `start.sh` or `start.bat`), then write your Minecraft start command in it. For Java servers, it looks like:
+    ```
+    java -Xmx1024M -Xms1024M -jar server.jar nogui
+    ```
+    For Bedrock servers, it's usually:
+    ```
+    LD_LIBRARY_PATH=. ./bedrock_server
+    ```
+4. Create `config.json` in the same directory and write [configurations](#configurations) in it.
+5. Run MC-Repeater using the command `mcrepeater`. You don't need to start Minecraft server manually because it's automatically started by MC-Repeater.
 
 ## Configurations
 
@@ -49,13 +56,13 @@ Here's a simple example `config.json` for Koishi bot:
 
 ### Parameters
 
-#### Minecraft server configuration:
+#### Minecraft server configurations:
 
 + **serverStart:** Path to your Minecraft server starting bash / batch file.
 + **serverType:** Type of your server. Can be `java` or `paper`.
-+ **autoRestart (optional):** A boolean value which determine whether the MC-Repeater will auto restart your server after your server stopped (default: `false`).
++ **autoRestart (optional):** A boolean value which determine whether the MC-Repeater will auto restart your server after your server crashed (default: `false`).
 
-#### Chat bot configuration:
+#### Chat bot configurations:
 
 + **botType:** Your bot type which determines how the message will be sent. Can be `koishi` or `local` (for debugging).
 + **botHost:** Hostname of your bot server.
@@ -67,3 +74,7 @@ Here's a simple example `config.json` for Koishi bot:
 
 + **throttleInterval (optional):** The minimum interval at which messages are sent (default: `0`).
 + **offlineTimeout (optional):** The minimum time to determine a player is offline (default: `0`).
+
+## License
+
+Licensed under the [MIT](https://github.com/obstudio/MC-Repeater/blob/master/LICENSE) License.
