@@ -12,7 +12,7 @@ A chat relay between Minecraft server and IRC with no mods.
 
 ### Chat bot support
 
-+ Koishi bot (for QQ)
++ [Koishi](https://koishijs.github.io/) (for QQ)
 
 ### Messages can be forwarded
 
@@ -40,7 +40,7 @@ A chat relay between Minecraft server and IRC with no mods.
 
 ## Configurations
 
-Here's a simple example `config.json` for Koishi bot:
+Here's a simple example `config.json` for Koishi:
 
 ```json
 {
