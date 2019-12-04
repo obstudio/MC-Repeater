@@ -1,4 +1,5 @@
-const config = require('./config')
+const process = require('process')
+const config = require(process.cwd() + '/config')
 const locale = require('./locale')
 
 const lang = locale[config.language.trim().toLowerCase()]
@@ -309,29 +310,36 @@ function parseJava(text) {
   const regJoin = new RegExp(`^(${vchar}+) joined the game$`)
   const regLeave = new RegExp(`^(${vchar}+) left the game$`)
   const regStart = /^Done \([0-9\.]+s\)! For help, type "help"$/
-  const regStop = /^Stopping the server$/
+  const regStop = /^Stopping server$/
   const regMsg = new RegExp(`^<(${vchar}+)> (.+)$`)
   const regServerMsg = new RegExp(`^\\[(${vchar}+)\\] (.+)$`)
   const regAdvance = new RegExp(`^(${vchar}+) has (?:made the advancement|reached the goal|completed the challenge) \\[(.+)\\]$`)
   info = undefined
   if (res = regJoin.exec(text)) {
     info = {
+      type: 'join',
+      target: res[1],
       message: translate(lang.join, res)
     }
   } else if (res = regLeave.exec(text)) {
     info = {
+      type: 'leave',
+      target: res[1],
       message: translate(lang.leave, res)
     }
   } else if (regStart.exec(text)) {
     info = {
+      type: 'start',
       message: lang.start
     }
   } else if (regStop.exec(text)) {
     info = {
+      type: 'stop',
       message: lang.stop
     }
   } else if (res = regMsg.exec(text)) {
     info = {
+      type: 'chat',
       message: translate(lang.msg, res)
     }
   } else if (res = regServerMsg.exec(text)) {
@@ -339,15 +347,18 @@ function parseJava(text) {
       res[1] = lang.server
     }
     info = {
+      type: 'server',
       message: translate(lang.msg, res)
     }
   } else if (res = regAdvance.exec(text)) {
     res[2] = lang.advancements[res[2]]
     info = {
+      type: 'advance',
       message: translate(lang.makeAdvance, res)
     }
   } else if (res = parseDeath(text)) {
     info = {
+      type: 'death',
       message: translate(lang.deathReasons[res[0]], res)
     }
   }
@@ -359,7 +370,7 @@ function parsePaper(text) {
 
   let info
 
-  const serverInfo = /^\[\d{2}:\d{2}:\d{2}\] \[Server thread\/INFO\]: (.+)$/
+  const serverInfo = /^\[\d{2}:\d{2}:\d{2} INFO\]: (.+)$/
   let serverInfoResult = serverInfo.exec(text)
 
   const chatInfo = /^\[\d{2}:\d{2}:\d{2}\] \[Async Chat Thread - #\d+\/INFO\]: (.+)$/
@@ -373,21 +384,28 @@ function parsePaper(text) {
     const regStop = /^Stopping server$/
     const regServerMsg = new RegExp(`^\\[(${vchar}+)\\] (.+)$`)
     const regAdvance = new RegExp(`^(${vchar}+) has (?:made the advancement|reached the goal|completed the challenge) \\[(.+)\\]$`)
+    const regMsg = new RegExp(`^<(${vchar}+)> (.+)$`)
 
     if (serverInfoResult = regJoin.exec(text)) {
       info = {
+        type: 'join',
+        target: serverInfoResult[1],
         message: translate(lang.join, serverInfoResult)
       }
     } else if (serverInfoResult = regLeave.exec(text)) {
       info = {
+        type: 'leave',
+        target: serverInfoResult[1],
         message: translate(lang.leave, serverInfoResult)
       }
     } else if (regStart.exec(text)) {
       info = {
+        type: 'start',
         message: lang.start
       }
     } else if (regStop.exec(text)) {
       info = {
+        type: 'stop',
         message: lang.stop
       }
     } else if (serverInfoResult = regServerMsg.exec(text)) {
@@ -395,25 +413,24 @@ function parsePaper(text) {
         serverInfoResult[1] = lang.server
       }
       info = {
+        type: 'server',
         message: translate(lang.msg, serverInfoResult)
       }
     } else if (serverInfoResult = regAdvance.exec(text)) {
       serverInfoResult[2] = lang.advancements[serverInfoResult[2]]
       info = {
+        type: 'advance',
         message: translate(lang.makeAdvance, serverInfoResult)
       }
     } else if (serverInfoResult = parseDeath(text)) {
       info = {
+        type: 'death',
         message: translate(lang.deathReasons[serverInfoResult[0]], serverInfoResult)
       }
-    }
-  } else if (chatInfoResult) {
-    text = chatInfoResult[1]
-    const regMsg = new RegExp(`^<(${vchar}+)> (.+)$`)
-
-    if (chatInfoResult = regMsg.exec(text)) {
+    } else if (serverInfoResult = regMsg.exec(text)) {
       info = {
-        message: translate(lang.msg, chatInfoResult)
+        type: 'chat',
+        message: translate(lang.msg, serverInfoResult)
       }
     }
   }

@@ -1,35 +1,86 @@
-const fs = require('fs')
+#!/usr/bin/env node
+
 const Iconv = require('iconv').Iconv
-const config = require('./config')
 const parse = require('./parse')
 const send = require('./send')
 const os = require('os')
+const process = require('process')
+const child_process = require('child_process')
+const config = require(process.cwd() + '/config')
+
+const OFFLINE_TIMEOUT = (config.offlineTimeout || 0) * 1000
 
 const gbk2utf8 = new Iconv('GBK', 'UTF-8')
+const offlinePlayers = new Set()
 
-fs.watchFile(config.logFile, (curr, prev) => {
-  if (curr.size - prev.size > 0) {
-    fs.open(config.logFile, 'r', (err, fd) => {
-      if (err) throw err
+const isWindows = os.type() === 'Windows_NT'
 
-      buffer = Buffer.alloc(curr.size - prev.size)
-      fs.read(fd, buffer, 0, curr.size - prev.size, prev.size, (err, bytesRead, buffer) => {
-        if (err) throw err
+let serverProcess
 
-        let content
-        if (os.type() === 'Windows_NT') {
-          content = gbk2utf8.convert(buffer).toString().split('\r\n').filter(s => s)
-        } else {
-          content = buffer.toString().split('\n').filter(s => s)
+let autoRestart = config.autoRestart
+function newServerProcess() {
+  return child_process.execFile(config.serverStart, { encoding: 'buffer' }, (error) => {
+    if (error) {
+      throw error
+    }
+    serverProcessStopped()
+  })
+}
+
+function serverProcessInit() {
+  //when serverProcess have output message
+  serverProcess.stdout.on('data', (data) => {
+    const content = isWindows ? gbk2utf8.convert(data).toString().trim() : data.toString().trim()
+    if (content) {
+      console.log(content)
+    }
+    const info = parse(content)
+    if (info) {
+      if (info.type === 'leave' && OFFLINE_TIMEOUT) {
+        offlinePlayers.add(info.target)
+        setTimeout(() => {
+          if (offlinePlayers.delete(info.target)) {
+            try {
+              send(info.message)
+            } catch (error) {
+              console.log(error)
+            }
+          }
+        }, OFFLINE_TIMEOUT)
+      } else {
+        if (info.type === 'join') {
+          if (offlinePlayers.delete(info.target)) return
         }
+        try {
+          send(info.message)          
+        } catch (error) {
+          console.log(error)
+        }
+      }
+    }
+  })
 
-        info = content.map(parse).filter(s => s)
-        info.forEach(send)
-      })
+  //send the parent process input to serverProcess input
+  process.stdin.pipe(serverProcess.stdin)
+}
 
-      fs.close(fd, (err) => {
-        if (err) throw err
-      })
-    })
+function serverProcessStopped() {
+  if (autoRestart) {
+    console.log('Server is restarting.')
+    serverProcess = newServerProcess()
+    serverProcessInit()
+  } else {
+    console.log('MC-Repeater stopped.')
+    process.exit()
+  }
+}
+
+process.stdin.on('data', (data) => {
+  if (data.toString().trim() === 'stop') {
+    autoRestart = false
   }
 })
+
+//create mc server child process
+serverProcess = newServerProcess()
+serverProcessInit()

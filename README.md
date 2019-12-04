@@ -10,21 +10,43 @@ A chat relay between Minecraft server and IRC with no mods.
 + Support vanilla and paper servers
 + Can be run on Windows, Linux and macOS
 
+### Chat bot support
+
++ [Koishi](https://koishijs.github.io/) (for QQ)
+
+### Messages can be forwarded
+
++ Chat
++ `/say` message
++ Server start up / shutdown
++ Player join / leave
++ Player death
++ Achievement
+
 ## Usage
 
-1. Install [NodeJS](https://nodejs.org/)
-1. Clone this repository
-2. Create `config.json` and write configurations in it
-3. Run `index.js` using `node .`
+1. Install [NodeJS](https://nodejs.org/).
+2. Install MC-Repeater globally using `npm install -g mcrepeater`.
+3. In your Minecraft server directory, create a bash / batch file (e.g. `start.sh` or `start.bat`), then write your Minecraft start command in it. For Java servers, it looks like:
+    ```
+    java -Xmx1024M -Xms1024M -jar server.jar nogui
+    ```
+    For Bedrock servers, it's usually:
+    ```
+    LD_LIBRARY_PATH=. ./bedrock_server
+    ```
+4. Create `config.json` in the same directory and write [configurations](#configurations) in it.
+5. Run MC-Repeater using the command `mcrepeater`. You don't need to start Minecraft server manually because it's automatically started by MC-Repeater.
 
 ## Configurations
 
-Here's an example `config.json` for Koishi bot:
+Here's a simple example `config.json` for Koishi:
 
 ```json
 {
-  "logFile": "/path/to/mc-server/logs/latest.log",
+  "serverStart": "start.sh",
   "serverType": "java",
+  "botType": "koishi",
   "botHost": "bot.your-host.com",
   "botPath": "/bot/request/path",
   "key": "your-secret-key",
@@ -34,9 +56,25 @@ Here's an example `config.json` for Koishi bot:
 
 ### Parameters
 
-+ **logFile:** Path to your Minecraft server latest log file.
+#### Minecraft server configurations:
+
++ **serverStart:** Path to your Minecraft server starting bash / batch file.
 + **serverType:** Type of your server. Can be `java` or `paper`.
++ **autoRestart (optional):** A boolean value which determine whether the MC-Repeater will auto restart your server after your server crashed (default: `false`).
+
+#### Chat bot configurations:
+
++ **botType:** Your bot type which determines how the message will be sent. Can be `koishi` or `local` (for debugging).
 + **botHost:** Hostname of your bot server.
 + **botPath:** Your request path to send information to. For Koishi, it's usually `/webhook/channel/your-channel`.
 + **key:** Your secret key to sign the information. Usually provided by your bot.
 + **language:** Your language. Currently support `en-us` and `zh-cn`.
+
+#### Network optimization:
+
++ **throttleInterval (optional):** The minimum interval at which messages are sent (default: `0`).
++ **offlineTimeout (optional):** The minimum time to determine a player is offline (default: `0`).
+
+## License
+
+Licensed under the [MIT](https://github.com/obstudio/MC-Repeater/blob/master/LICENSE) License.
