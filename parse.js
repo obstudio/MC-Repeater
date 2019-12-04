@@ -1,4 +1,5 @@
-const config = require('./config')
+const process = require('process')
+const config = require(process.cwd() + '/config')
 const locale = require('./locale')
 
 const lang = locale[config.language.trim().toLowerCase()]

@@ -1,10 +1,10 @@
-const config = require('./config')
 const Iconv = require('iconv').Iconv
 const parse = require('./parse')
 const send = require('./send')
 const os = require('os')
 const process = require('process')
 const child_process = require('child_process')
+const config = require(process.cwd() + '/config')
 
 const OFFLINE_TIMEOUT = (config.offlineTimeout || 0) * 1000
 

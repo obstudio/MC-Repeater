@@ -1,6 +1,7 @@
+const process = require('process')
 const https = require('https')
 const crypto = require('crypto')
-const config = require('./config')
+const config = require(process.cwd() + '/config')
 
 let bufferMessage = ''
 let lastTimestamp = 0
