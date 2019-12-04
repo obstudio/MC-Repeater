@@ -34,7 +34,7 @@ function serverProcessInit() {
     if (content) {
       console.log(content)
     }
-    info = parse(content)
+    const info = parse(content)
     if (info) {
       if (info.type === 'leave' && OFFLINE_TIMEOUT) {
         offlinePlayers.add(info.target)
