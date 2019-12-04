@@ -17,7 +17,7 @@ let serverProcess
 
 let autoRestart = config.autoRestart
 function newServerProcess() {
-  return child_process.execFile(config.serverStartFile, { encoding: 'buffer' }, (error) => {
+  return child_process.execFile(config.serverStart, { encoding: 'buffer' }, (error) => {
     if (error) {
       throw error
     }
@@ -74,9 +74,8 @@ function serverProcessStopped() {
 }
 
 process.stdin.on('data', (data) => {
-  if (data.toString().trim() === 'stopMCRepeater') {
+  if (data.toString().trim() === 'stop') {
     autoRestart = false
-    serverProcess.stdin.write(isWindows ? 'stop\r\n' : 'stop\n')
   }
 })
 
