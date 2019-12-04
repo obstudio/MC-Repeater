@@ -25,18 +25,19 @@ A chat relay between Minecraft server and IRC with no mods.
 
 ## Usage
 
-1. Install [NodeJS](https://nodejs.org/)
-2. Clone this repository
-3. Create `config.json` and write configurations in it
-4. Run `index.js` in your server directory using `node`
+1. Install [NodeJS](https://nodejs.org/).
+2. Install MC-Repeater globally using `npm install -g mcrepeater`.
+3. In your Minecraft server directory, create a bash / batch file (e.g. `start.sh` or `start.bat`), then write your Minecraft start command in it. MC-Repeater will automatically start the Minecraft server using this command.
+4. Create `config.json` in the same directory and write configurations (see below) in it.
+5. Run MC-Repeater with the command `mcrepeater`.
 
 ## Configurations
 
-Here's an example `config.json` for Koishi bot:
+Here's a simple example `config.json` for Koishi bot:
 
 ```json
 {
-  "serverStart": "/path/to/mc-server/start-server.sh",
+  "serverStart": "start.sh",
   "serverType": "java",
   "botType": "koishi",
   "botHost": "bot.your-host.com",

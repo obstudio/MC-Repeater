@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 const Iconv = require('iconv').Iconv
 const parse = require('./parse')
 const send = require('./send')

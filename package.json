@@ -6,6 +6,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "bin": {
+    "mcrepeater": "index.js"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/obstudio/MC-Repeater.git"
