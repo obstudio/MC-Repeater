@@ -75,6 +75,28 @@ Here's a simple example `config.json` for Koishi:
 + **throttleInterval (optional):** The minimum interval at which messages are sent (default: `0`).
 + **offlineTimeout (optional):** The minimum time to determine a player is offline (default: `0`).
 
+#### Custom Messages:
+
++ **customMessage (optional):** Custom messages to override original messages
+
+Example of customMessage
+
+```json
+"customMessage": {
+  "join": "Ob $1 joined the game.",
+  "leave": "Ob $1 left the game.",
+  "advancements": {
+    "Diamonds!": "Diorites!"
+  },
+  "deathReasons": {
+    "magic": "$1 was killed by mogic!",
+  },
+  "mobs": {
+    "Ender Dragon": "Dragon Bro"
+  }
+}
+```
+
 ## License
 
 Licensed under the [MIT](https://github.com/obstudio/MC-Repeater/blob/master/LICENSE) License.

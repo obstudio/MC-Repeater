@@ -2,10 +2,20 @@ const process = require('process')
 const config = require(process.cwd() + '/config')
 const locale = require('./locale')
 
-const lang = locale[config.language.trim().toLowerCase()]
+const lang = getLang()
 
 const vchar = '[^\\s\\$:;<>\\[\\]\\(\\)\\-\\,\\.\\{\\}+=*!?/\\\\|`~@#%^&\'"]'
 const mob = `${vchar}+(?: [A-Z][a-z]*)?`
+
+function getLang() {
+  const lang = locale[config.language.trim().toLowerCase()]
+  let customMessage = config.customMessage ? config.customMessage : {}
+  const langBase = Object.assign({}, lang, customMessage)
+  const advancements = Object.assign({}, lang.advancements, customMessage.advancements)
+  const deathReasons = Object.assign({}, lang.deathReasons, customMessage.deathReasons)
+  const mobs = Object.assign({}, lang.mobs, customMessage.mobs)
+  return Object.assign({}, langBase, { advancements, deathReasons, mobs })
+}
 
 function parse(text) {
   switch (config.serverType.trim().toLowerCase()) {
