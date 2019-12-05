@@ -363,7 +363,7 @@ function parseJava(text) {
   } else if (res = regAdvance.exec(text)) {
     res[2] = lang.advancements[res[2]]
     info = {
-      type: 'advance',
+      type: 'advancement',
       message: translate(lang.makeAdvance, res)
     }
   } else if (res = parseDeath(text)) {
@@ -429,7 +429,7 @@ function parsePaper(text) {
     } else if (serverInfoResult = regAdvance.exec(text)) {
       serverInfoResult[2] = lang.advancements[serverInfoResult[2]]
       info = {
-        type: 'advance',
+        type: 'advancement',
         message: translate(lang.makeAdvance, serverInfoResult)
       }
     } else if (serverInfoResult = parseDeath(text)) {

@@ -18,6 +18,12 @@ const isWindows = os.type() === 'Windows_NT'
 let serverProcess
 
 let autoRestart = config.autoRestart
+
+function filterMessage(message, type) {
+  if (config.messageMask && config.messageMask.includes(type)) return
+  send(message)
+}
+
 function newServerProcess() {
   return child_process.execFile(config.serverStart, { encoding: 'buffer' }, (error) => {
     if (error) {
@@ -41,7 +47,7 @@ function serverProcessInit() {
         setTimeout(() => {
           if (offlinePlayers.delete(info.target)) {
             try {
-              send(info.message)
+              filterMessage(info.message, info.type)
             } catch (error) {
               console.log(error)
             }
@@ -52,7 +58,7 @@ function serverProcessInit() {
           if (offlinePlayers.delete(info.target)) return
         }
         try {
-          send(info.message)          
+          filterMessage(info.message, info.type)
         } catch (error) {
           console.log(error)
         }

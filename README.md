@@ -79,23 +79,43 @@ Here's a simple example `config.json` for Koishi:
 
 + **customMessage (optional):** Custom messages to override original messages
 
-Example of customMessage
+  Example of customMessage
 
-```json
-"customMessage": {
-  "join": "Ob $1 joined the game.",
-  "leave": "Ob $1 left the game.",
-  "advancements": {
-    "Diamonds!": "Diorites!"
-  },
-  "deathReasons": {
-    "magic": "$1 was killed by mogic!",
-  },
-  "mobs": {
-    "Ender Dragon": "Dragon Bro"
+  ```json
+  "customMessage": {
+    "join": "Ob $1 joined the game.",
+    "leave": "Ob $1 left the game.",
+    "advancements": {
+      "Diamonds!": "Diorites!"
+    },
+    "deathReasons": {
+      "magic": "$1 was killed by mogic!",
+    },
+    "mobs": {
+      "Ender Dragon": "Dragon Bro"
+    }
   }
-}
-```
+  ```
+
+#### Message Mask:
+
++ **messageMasks (optional):** Block certain type of messages. 
+  | Message Type | Description                                     |
+  |--------------|-------------------------------------------------|
+  | join         | The message of a player joined the game         |
+  | leave        | The message of a player left the game           |
+  | start        | Server start message                            |
+  | stop         | Server stop message                             |
+  | chat         | Chat message from players                       |
+  | server       | Chat message from the server                    |
+  | advancement  | The message of a player achieved an advancement |
+  | death        | Player death message                            |
+
+  Example of messageMask
+
+  ```json
+  messageMasks: ["join", "leave", "death"]
+  ```
 
 ## License
 
