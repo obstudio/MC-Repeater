@@ -24,6 +24,8 @@ function parse(text) {
     case 'paper':
     case 'paperspigot':
       return parsePaper(text)
+    case 'bedrock':
+      return parseBedrock(text)
   }
 }
 
@@ -42,11 +44,11 @@ function mobName(name) {
   return lang.mobs[name] || name
 }
 
-function parseDeath (text) {
+function parseDeath(text) {
   const regDeath = new RegExp(`^(${vchar}+) (.+)$`)
   let result = regDeath.exec(text)
   if (!result) return null
-  
+
   let victim = result[1]
   let reason = result[2]
   let args = []
@@ -445,6 +447,49 @@ function parsePaper(text) {
     }
   }
 
+  return info
+}
+
+function parseBedrock(text) {
+  text = text.trim()
+  let info
+
+  const reg = /^\[\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2} INFO\] (.*)$/
+  const regJoin = new RegExp(`^Player connected: (${vchar}+), xuid: \\d{16}$`)
+  const regLeave = new RegExp(`^Player disconnected: (${vchar}+), xuid: \\d{16}$`)
+  const regStart = /^Server started\.$/
+  const regStop = /^Quit correctly$/
+
+  let res = reg.exec(text)
+  
+  if (!res) {
+    if (res = regStop.exec(text)) {
+      info = {
+        type: 'stop',
+        message: lang.stop
+      }
+    }
+  } else {
+    text = res[1]
+    if (res = regJoin.exec(text)) {
+      info = {
+        type: 'join',
+        target: res[1],
+        message: translate(lang.join, res)
+      }
+    } else if (res = regLeave.exec(text)) {
+      info = {
+        type: 'leave',
+        target: res[1],
+        message: translate(lang.leave, res)
+      }
+    } else if (regStart.exec(text)) {
+      info = {
+        type: 'start',
+        message: lang.start
+      }
+    }
+  }
   return info
 }
 

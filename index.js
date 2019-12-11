@@ -5,7 +5,7 @@ const parse = require('./parse')
 const send = require('./send')
 const os = require('os')
 const process = require('process')
-const child_process = require('child_process')
+const { execFile } = require('child_process')
 const config = require(process.cwd() + '/config')
 
 const OFFLINE_TIMEOUT = (config.offlineTimeout || 0) * 1000
@@ -14,18 +14,19 @@ const gbk2utf8 = new Iconv('GBK', 'UTF-8')
 const offlinePlayers = new Set()
 
 const isWindows = os.type() === 'Windows_NT'
+const messageMasks = config.messageMasks.map((type) => type.toString().trim().toLowerCase())
 
 let serverProcess
 
 let autoRestart = config.autoRestart
 
 function filterMessage(message, type) {
-  if (config.messageMask && config.messageMask.includes(type)) return
+  if (messageMasks && messageMasks.includes(type)) return
   send(message)
 }
 
 function newServerProcess() {
-  return child_process.execFile(config.serverStart, { encoding: 'buffer' }, (error) => {
+  return execFile(config.serverStart, { encoding: 'buffer' }, (error) => {
     if (error) {
       throw error
     }

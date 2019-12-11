@@ -7,7 +7,7 @@ A chat relay between Minecraft server and IRC with no mods.
 ## Features
 
 + No mods needed
-+ Support vanilla and paper servers
++ Support Java edition vanilla and paper servers and bedrock dedicated server
 + Can be run on Windows, Linux and macOS
 
 ### Chat bot support
@@ -59,7 +59,7 @@ Here's a simple example `config.json` for Koishi:
 #### Minecraft server configurations:
 
 + **serverStart:** Path to your Minecraft server starting bash / batch file.
-+ **serverType:** Type of your server. Can be `java` or `paper`.
++ **serverType:** Type of your server. Can be `java`, `paper` or `bedrock`.
 + **autoRestart (optional):** A boolean value which determine whether the MC-Repeater will auto restart your server after your server crashed (default: `false`).
 
 #### Chat bot configurations:
@@ -100,6 +100,7 @@ Here's a simple example `config.json` for Koishi:
 #### Message Mask:
 
 + **messageMasks (optional):** Block certain type of messages. 
+
   | Message Type | Description                                     |
   |--------------|-------------------------------------------------|
   | join         | The message of a player joined the game         |
