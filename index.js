@@ -14,14 +14,14 @@ const gbk2utf8 = new Iconv('GBK', 'UTF-8')
 const offlinePlayers = new Set()
 
 const isWindows = os.type() === 'Windows_NT'
-const messageMasks = config.messageMasks.map((type) => type.toString().trim().toLowerCase())
+const messageMask = config.messageMask ? config.messageMask.map((type) => type.toString().trim().toLowerCase()) : undefined
 
 let serverProcess
 
 let autoRestart = config.autoRestart
 
 function filterMessage(message, type) {
-  if (messageMasks && messageMasks.includes(type)) return
+  if (messageMask && messageMask.includes(type)) return
   send(message)
 }
 

@@ -7,8 +7,17 @@ A chat relay between Minecraft server and IRC with no mods.
 ## Features
 
 + No mods needed
-+ Support Java edition vanilla and paper servers and bedrock dedicated server
++ Support Java and Bedrock servers, vanilla and modded servers
 + Can be run on Windows, Linux and macOS
+
+### Minecraft server support
+
+Java Edition:
++ [Vanilla Server](https://www.minecraft.net/download/server)
++ [Paper](https://papermc.io/)
+
+Bedrock Edition:
++ [Bedrock Dedicated Server](https://www.minecraft.net/download/server/bedrock) (Only server start up / shutdown and player join / leave messages)
 
 ### Chat bot support
 
@@ -75,11 +84,11 @@ Here's a simple example `config.json` for Koishi:
 + **throttleInterval (optional):** The minimum interval at which messages are sent (default: `0`).
 + **offlineTimeout (optional):** The minimum time to determine a player is offline (default: `0`).
 
-#### Custom Messages:
+#### Custom messages:
 
 + **customMessage (optional):** Custom messages to override original messages
 
-  Example of customMessage
+  Example of `customMessage`:
 
   ```json
   "customMessage": {
@@ -97,9 +106,9 @@ Here's a simple example `config.json` for Koishi:
   }
   ```
 
-#### Message Mask:
+#### Message mask:
 
-+ **messageMasks (optional):** Block certain type of messages. 
++ **messageMask (optional):** Block certain type of messages. 
 
   | Message Type | Description                                     |
   |--------------|-------------------------------------------------|
@@ -112,10 +121,10 @@ Here's a simple example `config.json` for Koishi:
   | advancement  | The message of a player achieved an advancement |
   | death        | Player death message                            |
 
-  Example of messageMask
+  Example of `messageMask`:
 
   ```json
-  messageMasks: ["join", "leave", "death"]
+  messageMask: ["join", "leave", "death"]
   ```
 
 ## License
