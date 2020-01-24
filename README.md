@@ -21,7 +21,7 @@ Bedrock Edition:
 
 ### Chat bot support
 
-+ [Koishi](https://koishijs.github.io/) (for QQ)
++ [Koishi](https://koishi.js.org/) (for QQ)
 
 ### Messages can be forwarded
 
