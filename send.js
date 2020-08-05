@@ -30,10 +30,10 @@ const builtinSenders = {
   koishi(msg) {
     const msgShort = msg.length > 20 ? msg.slice(0, 10) + msg.length + msg.slice(-10) : msg
     const salt = crypto.randomBytes(4).toString('hex')
-    const sign = crypto.createHmac('sha1', config.key).update(msgShort + salt).digest('hex')
-    const path = `${config.botPath}?salt=${salt}&sign=${sign}&msg=${encodeURIComponent(msg)}`
+    const sign = crypto.createHmac('sha1', config.koishi.key).update(msgShort + salt).digest('hex')
+    const path = `${config.koishi.botPath}?salt=${salt}&sign=${sign}&msg=${encodeURIComponent(msg)}`
     const options = {
-      hostname: config.botHost,
+      hostname: config.koishi.botHost,
       path: path
     }
     return new Promise((resolve, reject) => {
@@ -45,14 +45,18 @@ const builtinSenders = {
     })
   },
   zulip(msg) {
-    zulipConfig = config.zulip.zuliprc
+    let zulipConfig = {
+      username: config.zulip.username,
+      apiKey: config.zulip.apiKey,
+      realm: config.zulip.realm,
+    }
+    let params = {
+      to: config.zulip.stream,
+      type: 'stream',
+      topic: config.zulip.topic,
+      content: msg
+    }
     Zulip(zulipConfig).then(async (client) => {
-      let params = {
-        to: config.zulip.stream,
-        type: 'stream',
-        topic: config.zulip.topic,
-        content: msg
-      }
       return await client.messages.send(params)
     }).then(console.log).catch(console.err)
   },

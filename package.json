@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/obstudio/MC-Repeater#readme",
   "dependencies": {
+    "@babel/core": "^7.11.1",
     "iconv": "^2.3.5",
     "zulip-js": "^2.0.8"
   }

@@ -49,16 +49,20 @@ Bedrock Edition:
 
 ## Configurations
 
-Here's a simple example `config.json` for Koishi:
+Here's a simple example `config.json` for Zulip:
 
 ```json
 {
   "serverStart": "start.sh",
   "serverType": "java",
-  "botType": "koishi",
-  "botHost": "bot.your-host.com",
-  "botPath": "/bot/request/path",
-  "key": "your-secret-key",
+  "botType": "zulip",
+  "zulip": {
+    "apiKey": "YOUR-BOT-API-KEY",
+    "username": "YOUR-BOT@example.com",
+    "realm": "https://example-org.example.com/",
+    "stream": "example-stream",
+    "topic": "example-topic"
+  },
   "language": "en-us"
 }
 ```
@@ -73,10 +77,17 @@ Here's a simple example `config.json` for Koishi:
 
 #### Chat bot configurations:
 
-+ **botType:** Your bot type which determines how the message will be sent. Can be `koishi` or `local` (for debugging).
-+ **botHost:** Hostname of your bot server.
-+ **botPath:** Your request path to send information to. For Koishi, it's usually `/webhook/channel/your-channel`.
-+ **key:** Your secret key to sign the information. Usually provided by your bot.
++ **botType:** Your bot type which determines how the message will be sent. Can be `zulip` or `koishi` or `local` (for debugging).
++ **koishi** bot configurations:
+  + **botHost:** Hostname of your bot server.
+  + **botPath:** Your request path to send information to. For Koishi, it's usually `/webhook/channel/your-channel`.
+  + **key:** Your secret key to sign the information. Usually provided by your bot.
++ **zulip** bot configurations:
+  + **username** Bot email
+  + **apiKey** Bot API key
+  + **realm** Your orgnization zulip site url.
+  + **stream** The stream where you want your bot to send.
+  + **topic** The topic where you want your bot to send.
 + **language:** Your language. Currently support `en-us` and `zh-cn`.
 
 #### Network optimization:
