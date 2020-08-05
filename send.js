@@ -2,6 +2,7 @@ const process = require('process')
 const https = require('https')
 const crypto = require('crypto')
 const config = require(process.cwd() + '/config')
+const Zulip = require('zulip-js')
 
 let bufferMessage = ''
 let lastTimestamp = 0
@@ -43,7 +44,18 @@ const builtinSenders = {
       })
     })
   },
-
+  zulip(msg) {
+    zulipConfig = config.zulip.zuliprc
+    Zulip(zulipConfig).then(async (client) => {
+      let params = {
+        to: config.zulip.stream,
+        type: 'stream',
+        topic: config.zulip.topic,
+        content: msg
+      }
+      return await client.messages.send(params)
+    }).then(console.log).catch(console.err)
+  },
   local(msg) {
     console.log(msg)
   }
