@@ -132,6 +132,14 @@ function parseDeath(text) {
     reason = 'ladderfall'
   } else if (reason === 'fell off some vines') {
     reason = 'vinefall'
+  } else if (reason === 'fell off some twisting vines') {
+    reason = 'twistingvinefall'
+  } else if (reason === 'fell off some weeping vines') {
+    reason = 'weepingvinefall'
+  } else if (reason === 'fell off scaffolding') {
+    reason = 'scaffoldingfall'
+  } else if (reason === 'fell while climbing') {
+    reason = 'climbfell'
   } else if (reason === 'fell out of the water') {
     reason = 'waterfall'
   } else if (reason === 'fell into a patch of fire') {
