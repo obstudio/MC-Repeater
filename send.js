@@ -18,10 +18,10 @@ async function send(message) {
 }
 
 async function sendBuffer() {
-  for (bot in config.bots) {
+  config.bots.forEach(bot => {
     let botType = (bot.botType || 'local').toLowerCase()
     await senders[botType](bufferMessage, bot)
-  }
+  })
   bufferMessage = ''
   lastTimestamp = Date.now()
 }
