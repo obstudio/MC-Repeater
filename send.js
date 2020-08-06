@@ -7,7 +7,7 @@ let lastTimestamp = 0
 
 const THROTTLE_INTERVAL = (config.throttleInterval || 0) * 1000
 
-async function send(message) {
+function send(message) {
   bufferMessage = bufferMessage ? `${bufferMessage}\n${message}` : message
   const timestamp = Date.now()
   if (timestamp - lastTimestamp > THROTTLE_INTERVAL) {
@@ -17,8 +17,8 @@ async function send(message) {
   }
 }
 
-async function sendBuffer() {
-  config.bots.forEach(bot => {
+function sendBuffer() {
+  config.bots.forEach(async bot => {
     let botType = (bot.botType || 'local').toLowerCase()
     await senders[botType](bufferMessage, bot)
   })
