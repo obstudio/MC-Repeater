@@ -37,6 +37,8 @@ jobs:
             --username "${DOCKER_USERNAME}" \
             --password-stdin
       - name: Run buildx and push
+        env:
+          DOCKER_REPO: obstudio/mcrepeater
         run: |
           docker buildx build \
             --output "type=image,push=true" \
