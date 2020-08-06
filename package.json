@@ -1,6 +1,6 @@
 {
   "name": "mcrepeater",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "A chat relay between Minecraft server and IRC with no mods.",
   "main": "index.js",
   "scripts": {
