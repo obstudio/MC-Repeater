@@ -21,6 +21,7 @@ Bedrock Edition:
 
 ### Chat bot support
 
++ [Zulip](https://zulipchat.com/)
 + [Koishi](https://koishi.js.org/) (for QQ)
 
 ### Messages can be forwarded
@@ -49,20 +50,43 @@ Bedrock Edition:
 
 ## Configurations
 
-Here's a simple example `config.json` for Zulip:
+### Examples
+
+Here's some simple `config.json` examples:
+
+#### Zulip
 
 ```json
 {
   "serverStart": "start.sh",
   "serverType": "java",
-  "botType": "zulip",
-  "zulip": {
-    "apiKey": "YOUR-BOT-API-KEY",
-    "username": "YOUR-BOT@example.com",
-    "realm": "https://example-org.example.com/",
-    "stream": "example-stream",
-    "topic": "example-topic"
-  },
+  "bots": [
+    {
+      "botType": "zulip",
+      "botHost": "example-org.example.com",
+      "botName": "your-bot@example.com",
+      "channel": "example-stream/example-topic",
+      "key": "your-bot-api-key"
+    }
+  ],
+  "language": "en-us"
+}
+```
+
+#### Koishi
+
+```json
+{
+  "serverStart": "start.sh",
+  "serverType": "java",
+  "bots": [
+    {
+      "botType": "koishi",
+      "botHost": "bot.your-host.com",
+      "channel": "your-channel",
+      "key": "your-secret-key"
+    }
+  ],
   "language": "en-us"
 }
 ```
@@ -77,17 +101,12 @@ Here's a simple example `config.json` for Zulip:
 
 #### Chat bot configurations:
 
+An array for bot configurations:
 + **botType:** Your bot type which determines how the message will be sent. Can be `zulip` or `koishi` or `local` (for debugging).
-+ **koishi** bot configurations:
-  + **botHost:** Hostname of your bot server.
-  + **botPath:** Your request path to send information to. For Koishi, it's usually `/webhook/channel/your-channel`.
-  + **key:** Your secret key to sign the information. Usually provided by your bot.
-+ **zulip** bot configurations:
-  + **username** Bot email
-  + **apiKey** Bot API key
-  + **realm** Your orgnization zulip site url.
-  + **stream** The stream where you want your bot to send.
-  + **topic** The topic where you want your bot to send.
++ **botHost:** Hostname of your bot server.
++ **botName:** User name of your bot. For Zulip, it's your bot e-mail address. It is not needed for Koishi.
++ **channel:** The channel you want to send information to. For Zulip, it's `"example-stream/example-topic"`.
++ **key:** The API key or secret key for your bot. Usually provided by your bot server.
 + **language:** Your language. Currently support `en-us` and `zh-cn`.
 
 #### Network optimization:
