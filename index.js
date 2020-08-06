@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-const Iconv = require('iconv').Iconv
+const iconv = require('iconv-lite')
 const parse = require('./parse')
 const send = require('./send')
 const os = require('os')
@@ -10,7 +10,6 @@ const config = require(process.cwd() + '/config')
 
 const OFFLINE_TIMEOUT = (config.offlineTimeout || 0) * 1000
 
-const gbk2utf8 = new Iconv('GBK', 'UTF-8')
 const offlinePlayers = new Set()
 
 const isWindows = os.type() === 'Windows_NT'
@@ -37,7 +36,7 @@ function newServerProcess() {
 function serverProcessInit() {
   //when serverProcess have output message
   serverProcess.stdout.on('data', (data) => {
-    const content = isWindows ? gbk2utf8.convert(data).toString().trim() : data.toString().trim()
+    const content = isWindows ? iconv.decode(data, 'gbk').trim() : data.toString().trim()
     if (content) {
       console.log(content)
     }
